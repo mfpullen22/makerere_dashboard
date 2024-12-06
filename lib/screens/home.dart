@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              "This dashboard serves as a hub for all projects funded through the UAB CDC U01 grant.",
+              "This dashboard serves as a hub for the Makerere Admin Panel.",
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 16),
