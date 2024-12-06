@@ -81,7 +81,10 @@ class _AddPresentationScreenState extends State<AddPresentationScreen> {
             ),
             Expanded(
               child: StreamBuilder<QuerySnapshot>(
-                stream: _firestore.collection('presentations').snapshots(),
+                stream: _firestore
+                    .collection('presentations')
+                    .orderBy('title', descending: false)
+                    .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
