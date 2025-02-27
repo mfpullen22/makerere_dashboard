@@ -4,6 +4,7 @@ import 'package:makerere_dashboard/screens/add_presentation.dart';
 import 'package:makerere_dashboard/screens/edit_schedule.dart';
 import 'package:makerere_dashboard/screens/edit_students.dart';
 import 'package:makerere_dashboard/screens/home.dart';
+import 'package:makerere_dashboard/screens/users_screen.dart'; // <--- NEW IMPORT
 
 class HubScreen extends StatefulWidget {
   const HubScreen({super.key});
@@ -13,6 +14,7 @@ class HubScreen extends StatefulWidget {
 }
 
 class _HubScreenState extends State<HubScreen> {
+  // By default, show HomeScreen
   Widget _activePage = const HomeScreen();
   String _activePageTitle = "Home";
 
@@ -74,9 +76,7 @@ class _HubScreenState extends State<HubScreen> {
           selected: _activePageTitle == "Home",
           onTap: () {
             _selectPage(const HomeScreen(), "Home");
-            if (MediaQuery.of(context).size.width <= 800) {
-              Navigator.of(context).pop(); // Close drawer if on mobile
-            }
+            _closeDrawerIfMobile(context);
           },
         ),
         ListTile(
@@ -84,9 +84,7 @@ class _HubScreenState extends State<HubScreen> {
           selected: _activePageTitle == "Add Presentation",
           onTap: () {
             _selectPage(AddPresentationScreen(), "Add Presentation");
-            if (MediaQuery.of(context).size.width <= 800) {
-              Navigator.of(context).pop(); // Close drawer if on mobile
-            }
+            _closeDrawerIfMobile(context);
           },
         ),
         ListTile(
@@ -94,9 +92,7 @@ class _HubScreenState extends State<HubScreen> {
           selected: _activePageTitle == "Edit Schedule",
           onTap: () {
             _selectPage(const EditScheduleScreen(), "Edit Schedule");
-            if (MediaQuery.of(context).size.width <= 800) {
-              Navigator.of(context).pop(); // Close drawer if on mobile
-            }
+            _closeDrawerIfMobile(context);
           },
         ),
         ListTile(
@@ -104,12 +100,27 @@ class _HubScreenState extends State<HubScreen> {
           selected: _activePageTitle == "Edit Students",
           onTap: () {
             _selectPage(const EditStudentsScreen(), "Edit Students");
-            if (MediaQuery.of(context).size.width <= 800) {
-              Navigator.of(context).pop(); // Close drawer if on mobile
-            }
+            _closeDrawerIfMobile(context);
+          },
+        ),
+        // ---------------------------
+        // NEW LIST TILE FOR MENTORSHIP
+        // ---------------------------
+        ListTile(
+          title: const Text("View Meetings/Reviews"),
+          selected: _activePageTitle == "View Meetings/Reviews",
+          onTap: () {
+            _selectPage(const UsersScreen(), "View Meetings/Reviews");
+            _closeDrawerIfMobile(context);
           },
         ),
       ],
     );
+  }
+
+  void _closeDrawerIfMobile(BuildContext context) {
+    if (MediaQuery.of(context).size.width <= 800) {
+      Navigator.of(context).pop(); // Close drawer if on mobile
+    }
   }
 }
